@@ -25,7 +25,7 @@ function doniapay_init_gateway_class() {
 
         public function __construct() {
             
-            $this->id = 'uniquepaybd';
+            $this->id = 'doniapay';
             $this->icon = 'https://doniapay.com/assets/images/website/logo.png';
             $this->has_fields = false;
             $this->method_title = __('Doniapay','doniapay-gateway');
@@ -162,7 +162,7 @@ function doniapay_init_gateway_class() {
             }
 
             if ($order->get_status() != 'completed') {
-                $order->update_status('pending', __('Customer is being redirected to uniquepaybd', 'uniquepaybd'));
+                $order->update_status('pending', __('Customer is being redirected to doniapay', 'doniapay'));
             }
             $redirect_url = $this->get_return_url($order);
             
@@ -245,23 +245,23 @@ function doniapay_init_gateway_class() {
                     $sender_number = $data['cus_email'];
                     $payment_method = 'Doniapay';
                     if ($this->get_option('is_digital') === 'yes') {
-                        $order->update_status('completed', __("Doniapay payment was successfully completed. Payment Method: {$payment_method}, Amount: {$amount}, Transaction ID: {$transaction_id}, Sender Number: {$sender_number}", 'uniquepaybd-gateway'));
+                        $order->update_status('completed', __("Doniapay payment was successfully completed. Payment Method: {$payment_method}, Amount: {$amount}, Transaction ID: {$transaction_id}, Sender Number: {$sender_number}", 'doniapay-gateway'));
                         // Reduce stock levels
                         $order->reduce_order_stock();
                         $order->add_order_note( __( 'Payment completed via PGW URL checkout. trx id: '.$transaction_id, 'doniapay-gateway' ) );
                         $order->payment_complete();
                     } else {
-                        $order->update_status('processing', __("Doniapay payment was successfully processed. Payment Method: {$payment_method}, Amount: {$amount}, Transaction ID: {$transaction_id}, Sender Number: {$sender_number}", 'uniquepaybd-gateway'));
+                        $order->update_status('processing', __("Doniapay payment was successfully processed. Payment Method: {$payment_method}, Amount: {$amount}, Transaction ID: {$transaction_id}, Sender Number: {$sender_number}", 'doniapay-gateway'));
                         // Reduce stock levels
                         $order->reduce_order_stock();
                         $order->payment_complete();
                     }
                     return true;
                 } elseif($_GET['p_type']=="bank") {
-                    $order->update_status('on-hold', __('Doniapay payment was successfully on-hold.Bank Transaction is successful. Please check it manually and inform the Site owner.', 'uniquepaybd-gateway'));
+                    $order->update_status('on-hold', __('Doniapay payment was successfully on-hold.Bank Transaction is successful. Please check it manually and inform the Site owner.', 'doniapay-gateway'));
                     return true;
                 }else{
-                    $order->update_status('on-hold', __('Doniapay payment was successfully on-hold. Transaction id not found. Please check it manually.', 'uniquepaybd-gateway'));
+                    $order->update_status('on-hold', __('Doniapay payment was successfully on-hold. Transaction id not found. Please check it manually.', 'doniapay-gateway'));
                     return true;
                 }
             }
@@ -269,7 +269,7 @@ function doniapay_init_gateway_class() {
         }      
         
     }
-    function uniquepaybd_add_gateway_class( $gateways ) {
+    function doniapay_add_gateway_class( $gateways ) {
         $gateways[] = 'WC_doniapay_Gateway';
         return $gateways;
     }
