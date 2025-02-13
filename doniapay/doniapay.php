@@ -2,7 +2,7 @@
 /*
  * Plugin Name: DoniaPay
  * Plugin URI: https://wordpress.org/plugins/Doniapay
- * Description: This plugin allows your customers to pay with Bkash, Nagad, Rocket and all BD gateways via uniquepaybd
+ * Description: This plugin allows your customers to pay with Bkash, Nagad, Rocket and all BD gateways via doniapay
  * Author: techmicroofficial
  * Author URI: https://doniapay.com
  * Version: 1.0.0
